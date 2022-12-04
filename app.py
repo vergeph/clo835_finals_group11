@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, send_file
 from pymysql import connections
 import os
 import random
 import argparse
 import boto3
+import botocore
 
 
 app = Flask(__name__)
@@ -14,19 +15,29 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 BACKGROUND_FROM_ENV = os.environ.get('APP_BACKGROUND') or "back1"
 DBPORT = int(os.environ.get("DBPORT"))
-GROUP_NAME = os.environ.get("GROUP_NAME")
 S3_BUCKET = os.environ.get("S3_BUCKET")
 S3_KEY = os.environ.get("S3_KEY")
 S3_SECRET = os.environ.get("S3_SECRET")
-
+S3_TOKEN = os.environ.get("S3_TOKEN")
+GROUP_NAME = os.environ.get("GROUP_NAME")
+AWS_REGION = os.environ.get("AWS_REGION")
 
 # Permission to S3 Bucket
-s3_resource = boto3.resource(
-   "s3",
-   aws_access_key_id=S3_KEY,
-   aws_secret_access_key=S3_SECRET
-)
+app.config['S3_BUCKET'] = S3_BUCKET
+app.config['S3_KEY'] = S3_KEY
+app.config['S3_SECRET'] = S3_SECRET
+app.config['S3_TOKEN'] = S3_TOKEN
+app.config['S3_LOCATION'] = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
 
+s3 = boto3.client("s3",
+            aws_access_key_id=app.config['S3_KEY'],
+            aws_secret_access_key=app.config['S3_SECRET'],
+            aws_session_token=app.config['S3_TOKEN'],
+            region_name=AWS_REGION
+            )
+            
+#bucket = s3.Bucket(S3_BUCKET)
+    
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
     host= DBHOST,
@@ -56,20 +67,28 @@ BACKGROUND = random.choice(["back1", "back2", "back3"])
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
+ 
     return render_template('addemp.html', GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
+    
+    # Permission to S3 Bucket
+    s3 = boto3.resource("s3",
+            aws_access_key_id=S3_KEY,
+            aws_secret_access_key=S3_SECRET,
+            aws_session_token=S3_TOKEN,
+            region_name=AWS_REGION
+            )
+            
+    #bucket = s3.Bucket(S3_BUCKET)
+    for obj in s3.Bucket(S3_BUCKET).objects.all():
+        print(obj)
+        
     return render_template('about.html', GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -94,15 +113,11 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
     return render_template("getemp.html", GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
 def FetchData():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
     emp_id = request.form['emp_id']
 
     output = {}
