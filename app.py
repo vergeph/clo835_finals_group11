@@ -57,7 +57,6 @@ background_url = {
     "back3": "https://clo835-finals-group11.s3.amazonaws.com/back3.jpeg"
     }
 
-
 # Create a string of supported backgrounds
 SUPPORTED_BACKGROUND = ",".join(background_url.keys())
 
