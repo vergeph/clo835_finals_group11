@@ -4,6 +4,7 @@ COPY . /app
 WORKDIR /app
 RUN set -xe \
     && apt-get update -y \
+    && apt-get install vim -y \
     && apt-get install -y python3-pip \
     && apt-get install -y mysql-client 
 RUN pip install --upgrade pip
