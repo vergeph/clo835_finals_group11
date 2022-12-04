@@ -36,9 +36,7 @@ export DBUSER=root
 export DATABASE=employees
 export DBPWD=pw
 export APP_BACKGROUND=back2
-export S3_BUCKET=arn:aws:s3:::clo835-finals-group11
-export S3_KEY=ASIAWZIDVPRD6VZXTZXT
-export S3_SECRET=lnXoctgcAm2BAadjRHo1FX/2zIZsLN1JOr4COqzp
+
 ```
 ### Run the application, make sure it is visible in the browser
 ```docker run -p 81:81  -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD  -e  APP_BACKGROUND=$APP_BACKGROUND -e S3_BUCKET=$S3_BUCKET -e S3_KEY=$S3_KEY -e S3_SECRET=$S3_SECRET my_app```

@@ -1,0 +1,38 @@
+#Deploy the app with default background
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: employees
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      containers:
+        - name: app
+          image: 645402193523.dkr.ecr.us-east-1.amazonaws.com/myapp:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DBPWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+            - name: DBPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_PORT
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_HOST

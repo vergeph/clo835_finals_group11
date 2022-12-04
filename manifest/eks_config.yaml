@@ -1,0 +1,20 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: assignment3
+  region: "us-east-1"
+  version: "1.21"
+
+availabilityZones: ["us-east-1a" ,"us-east-1b" ,"us-east-1c"]
+iam:
+  serviceRoleARN: arn:aws:iam::645402193523:role/LabRole
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 2
+  instanceType: t3.small
+  ssh:
+    enableSsm: true
+  iam:
+    instanceRoleARN: arn:aws:iam::645402193523:role/LabRole

@@ -1,0 +1,14 @@
+#commands
+#create base64 encoded password
+echo -n 'admin' | base64
+k exec db-deployment-6b498f5965-7zkxq -n lab3 -it -- bash
+echo $MYSQL_ROOT_PASSWORD
+mysql --user=root --password=$MYSQL_ROOT_PASSWORD
+show databases;
+
+k create storage_class.yaml
+
+k create pvc.yaml
+
+k create secrets.yaml
+

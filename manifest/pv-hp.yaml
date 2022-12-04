@@ -1,0 +1,15 @@
+#Deploy PV for hostpath
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-hp
+spec:
+  capacity: 
+    storage: 4Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: localstorage
+  hostPath:
+    path: /tmp/mysql
