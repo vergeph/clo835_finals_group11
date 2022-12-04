@@ -1,7 +1,3 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: finals
 ---
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
@@ -9,8 +5,7 @@ kind: ClusterConfig
 metadata:
   name: clo835
   region: "us-east-1"
-  version: "1.19"
-  namespace: finals
+  version: "1.21"
 
 availabilityZones: ["us-east-1a" ,"us-east-1b" ,"us-east-1c"]
 

@@ -3,7 +3,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: assignment3
+  name: finals
   region: "us-east-1"
   version: "1.21"
 

@@ -6,7 +6,7 @@ metadata:
   labels:
     app: employees
 spec:
-  replicas: 2
+  replicas: 
   selector:
     matchLabels:
       app: employees
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: 645402193523.dkr.ecr.us-east-1.amazonaws.com/myapp:1
+          image: 466548522055.dkr.ecr.us-east-1.amazonaws.com/finals-app:v4.0
           ports:
             - containerPort: 8080
           env:
