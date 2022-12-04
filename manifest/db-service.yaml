@@ -1,0 +1,14 @@
+#Deploy the database service
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+  labels:
+    app: mysql
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql
+  type: ClusterIP

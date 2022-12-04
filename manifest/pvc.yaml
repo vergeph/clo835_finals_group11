@@ -1,0 +1,14 @@
+#Deploy PVC for EBS Volume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  annotations:
+    volume.beta.kubernetes.io/storage-class: gp2-sc
+spec: 
+  accessModes:
+  - ReadWriteOnce
+  resources: 
+    requests:
+      storage: 4Gi
+  volumeMode: Filesystem
