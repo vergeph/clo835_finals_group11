@@ -14,6 +14,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 BACKGROUND_FROM_ENV = os.environ.get('APP_BACKGROUND') or "back1"
 DBPORT = int(os.environ.get("DBPORT"))
+GROUP_NAME = os.environ.get("GROUP_NAME")
 S3_BUCKET = os.environ.get("S3_BUCKET")
 S3_KEY = os.environ.get("S3_KEY")
 S3_SECRET = os.environ.get("S3_SECRET")
@@ -57,13 +58,13 @@ BACKGROUND = random.choice(["back1", "back2", "back3"])
 def home():
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
-    return render_template('addemp.html', background=background_url[BACKGROUND])
+    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 @app.route("/about", methods=['GET','POST'])
 def about():
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
-    return render_template('about.html', background=background_url[BACKGROUND])
+    return render_template('about.html', GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -89,13 +90,13 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, background=background_url[BACKGROUND])
+    return render_template('addempoutput.html', name=emp_name, GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
     s3_resource = boto3.resource('s3')
     my_bucket = s3_resource.Bucket(S3_BUCKET)
-    return render_template("getemp.html", background=background_url[BACKGROUND])
+    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -126,7 +127,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background=background_url[BACKGROUND])
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
 
 if __name__ == '__main__':
     
