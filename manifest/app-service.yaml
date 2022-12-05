@@ -5,6 +5,7 @@ metadata:
   name: app-service
   labels:
     name: app-lb-service
+    run: app-deployment-hpa
 spec:
   ports:
   - port: 80

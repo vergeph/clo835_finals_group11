@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: 466548522055.dkr.ecr.us-east-1.amazonaws.com/finals-app:v4.0
+          image: 466548522055.dkr.ecr.us-east-1.amazonaws.com/finals-app:v5.0
           ports:
             - containerPort: 81
           env:
@@ -36,3 +36,13 @@ spec:
                 configMapKeyRef:
                   name: app-config
                   key: DB_HOST
+            - name: APP_BACKGROUND
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_BACKGROUND
+            - name: GROUP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: GROUP_NAME

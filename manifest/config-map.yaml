@@ -17,6 +17,6 @@ data:
 
   DATABASE: "employees"
   
-  APP_BACKGROUND: "back1"
+  APP_BACKGROUND: "back2"
   
   GROUP_NAME: "GROUP_11"
