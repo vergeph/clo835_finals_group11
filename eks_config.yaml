@@ -8,14 +8,13 @@ metadata:
   version: "1.21"
 
 availabilityZones: ["us-east-1a" ,"us-east-1b" ,"us-east-1c"]
-
-cloudWatch:
-  clusterLogging:
-    enableTypes: ["authenticator"]
-    
+iam:
+  serviceRoleARN: arn:aws:iam::466548522055:role/LabRole
 managedNodeGroups:
 - name: nodegroup
   desiredCapacity: 2
   instanceType: t3.small
   ssh:
     enableSsm: true
+  iam:
+    instanceRoleARN: arn:aws:iam::466548522055:role/LabRole
