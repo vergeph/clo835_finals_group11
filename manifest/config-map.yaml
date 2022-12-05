@@ -17,4 +17,4 @@ data:
 
   DATABASE: "employees"
   
-  APP_COLOR: "blue"
+  APP_BACKGROUND: "back2"
