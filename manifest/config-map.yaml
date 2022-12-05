@@ -17,4 +17,6 @@ data:
 
   DATABASE: "employees"
   
-  APP_COLOR: "blue"
+  APP_BACKGROUND: "back1"
+  
+  GROUP_NAME: "GROUP_11"
