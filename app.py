@@ -5,6 +5,7 @@ import random
 import argparse
 import boto3
 import botocore
+import io
 
 
 app = Flask(__name__)
@@ -29,7 +30,7 @@ app.config['S3_SECRET'] = S3_SECRET
 app.config['S3_TOKEN'] = S3_TOKEN
 app.config['S3_LOCATION'] = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
 
-s3 = boto3.client("s3",
+s3 = boto3.resource("s3",
             aws_access_key_id=app.config['S3_KEY'],
             aws_secret_access_key=app.config['S3_SECRET'],
             aws_session_token=app.config['S3_TOKEN'],
@@ -73,16 +74,24 @@ def home():
 def about():
     
     # Permission to S3 Bucket
-    s3 = boto3.resource("s3",
-            aws_access_key_id=S3_KEY,
-            aws_secret_access_key=S3_SECRET,
-            aws_session_token=S3_TOKEN,
-            region_name=AWS_REGION
-            )
-            
-    #bucket = s3.Bucket(S3_BUCKET)
-    for obj in s3.Bucket(S3_BUCKET).objects.all():
-        print(obj)
+    #s3 = boto3.resource("s3",
+           # aws_access_key_id=S3_KEY,
+           # aws_secret_access_key=S3_SECRET,
+           # aws_session_token=S3_TOKEN,
+           # region_name=AWS_REGION
+           # )
+    
+    #s3.download_file(
+    #bucket=(S3_BUCKET), Key="back1.jpeg", Filename="back1_local.jpeg"
+    #)
+    
+    #s3.download_file(
+    #bucket=(S3_BUCKET), Key="back2.jpeg", Filename="back2_local.jpeg"
+    #)
+    
+    #s3.download_file(
+    #bucket=(S3_BUCKET), Key="back3.jpeg", Filename="back3_local.jpeg"
+    #)
         
     return render_template('about.html', GROUP_NAME=GROUP_NAME, background=background_url[BACKGROUND])
     
