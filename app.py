@@ -17,29 +17,29 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 BACKGROUND_FROM_ENV = os.environ.get('APP_BACKGROUND') or "back1"
 DBPORT = int(os.environ.get("DBPORT"))
 S3_BUCKET = os.environ.get("S3_BUCKET")
-S3_KEY = os.environ.get("S3_KEY")
-S3_SECRET = os.environ.get("S3_SECRET")
-S3_TOKEN = os.environ.get("S3_TOKEN")
+#S3_KEY = os.environ.get("S3_KEY")
+#S3_SECRET = os.environ.get("S3_SECRET")
+#S3_TOKEN = os.environ.get("S3_TOKEN")
 GName = os.environ.get("GROUP_NAME")
-AWS_REGION = os.environ.get("AWS_REGION")
+#AWS_REGION = os.environ.get("AWS_REGION")
 
 print(" printing environment fetched dbhost name  --- " + str(DBHOST))  #for debugging purpose
 print(" printing environment fetched group name  --- " + str(GName))  #for debugging purpose
 print(" printing environment fetched s3 bucket name  --- " + str(S3_BUCKET))  #for debugging purpose
 
 # Permission to S3 Bucket
-app.config['S3_BUCKET'] = S3_BUCKET
-app.config['S3_KEY'] = S3_KEY
-app.config['S3_SECRET'] = S3_SECRET
-app.config['S3_TOKEN'] = S3_TOKEN
-app.config['S3_LOCATION'] = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
+#app.config['S3_BUCKET'] = S3_BUCKET
+#app.config['S3_KEY'] = S3_KEY
+#app.config['S3_SECRET'] = S3_SECRET
+#app.config['S3_TOKEN'] = S3_TOKEN
+#app.config['S3_LOCATION'] = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
 
-s3 = boto3.resource("s3",
-            aws_access_key_id=app.config['S3_KEY'],
-            aws_secret_access_key=app.config['S3_SECRET'],
-            aws_session_token=app.config['S3_TOKEN'],
-            region_name=AWS_REGION
-            )
+#s3 = boto3.resource("s3",
+            #aws_access_key_id=app.config['S3_KEY'],
+            #aws_secret_access_key=app.config['S3_SECRET'],
+            #aws_session_token=app.config['S3_TOKEN'],
+            #region_name=AWS_REGION
+            #)
             
 #bucket = s3.Bucket(S3_BUCKET)
     
