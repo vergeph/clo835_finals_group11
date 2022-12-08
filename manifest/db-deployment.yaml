@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: mysql
   strategy:
-    type: Ramped
+    type: Recreate
   template:
     metadata:
       labels:
