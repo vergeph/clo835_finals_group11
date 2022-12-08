@@ -26,6 +26,11 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
+            - name: DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username            
             - name: DBPORT
               valueFrom:
                 configMapKeyRef:
