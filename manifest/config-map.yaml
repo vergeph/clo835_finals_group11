@@ -1,4 +1,3 @@
-#Deploy configmap for DB Host, User, Port, Database and App Colour
 apiVersion: v1
 
 kind: ConfigMap
