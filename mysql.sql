@@ -9,7 +9,7 @@ last_name VARCHAR(20),
 primary_skill VARCHAR(20),
 location VARCHAR(20));
 
-INSERT INTO employee VALUES ('1','Amanda','Williams','Smile','local');
-INSERT INTO employee VALUES ('1','Alan','Williams','Empathy','alien');
+INSERT INTO employee VALUES ('1','Alvin','Williams','Smile','local');
+INSERT INTO employee VALUES ('1','Alfred','Williams','Empathy','local');
 SELECT * FROM employee;
 
