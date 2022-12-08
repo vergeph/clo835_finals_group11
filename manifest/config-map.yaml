@@ -9,8 +9,6 @@ metadata:
 
 data:
 
-  DB_USER: root
-
   DB_HOST: "db-service"
 
   DB_PORT: "3306"
