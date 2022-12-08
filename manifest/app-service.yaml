@@ -6,8 +6,8 @@ metadata:
     name: app-lb-service
 spec:
   ports:
-  - port: 81
-    targetPort: 80
+  - port: 80
+    targetPort: 81
     name: http
   selector:
     app: employees
