@@ -1,4 +1,3 @@
-#Deploy database with EBS PVC
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,7 +10,7 @@ spec:
     matchLabels:
       app: mysql
   strategy:
-    type: Recreate
+    type: Ramped
   template:
     metadata:
       labels:
