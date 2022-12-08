@@ -25,7 +25,7 @@ AWS_REGION = os.environ.get("AWS_REGION")
 
 print(" printing environment fetched dbhost name  --- " + str(DBHOST))  #for debugging purpose
 print(" printing environment fetched group name  --- " + str(GName))  #for debugging purpose
-
+print(" printing environment fetched s3 bucket name  --- " + str(S3_BUCKET))  #for debugging purpose
 # Permission to S3 Bucket
 app.config['S3_BUCKET'] = S3_BUCKET
 app.config['S3_KEY'] = S3_KEY
