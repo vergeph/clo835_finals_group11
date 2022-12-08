@@ -23,6 +23,7 @@ S3_TOKEN = os.environ.get("S3_TOKEN")
 GName = os.environ.get("GROUP_NAME")
 AWS_REGION = os.environ.get("AWS_REGION")
 
+print(" printing environment fetched dbhost name  --- " + str(DBHOST))  #for debugging purpose
 print(" printing environment fetched group name  --- " + str(GName))  #for debugging purpose
 
 # Permission to S3 Bucket
