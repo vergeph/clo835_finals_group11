@@ -36,7 +36,12 @@ s3 = boto3.resource("s3",
             aws_session_token=app.config['S3_TOKEN'],
             region_name=AWS_REGION
             )
-            
+
+s3Client = boto3.client('s3')
+obj1 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back1.jpeg'}, ExpiresIn = 100)
+obj2 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back2.jpeg'}, ExpiresIn = 100)
+obj3 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back3.jpeg'}, ExpiresIn = 100)
+
 #bucket = s3.Bucket(S3_BUCKET)
     
 # Create a connection to the MySQL database
