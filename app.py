@@ -20,10 +20,10 @@ S3_BUCKET = os.environ.get("S3_BUCKET")
 S3_KEY = os.environ.get("S3_KEY")
 S3_SECRET = os.environ.get("S3_SECRET")
 S3_TOKEN = os.environ.get("S3_TOKEN")
-GROUP_NAME = os.environ.get("GROUP_NAME")
+GName = os.environ.get("GROUP_NAME")
 AWS_REGION = os.environ.get("AWS_REGION")
 
-gname = str(GROUP_NAME)
+print(" printing environment fetched group name  --- " + str(GName))  #for debugging purpose
 
 # Permission to S3 Bucket
 app.config['S3_BUCKET'] = S3_BUCKET
@@ -38,12 +38,7 @@ s3 = boto3.resource("s3",
             aws_session_token=app.config['S3_TOKEN'],
             region_name=AWS_REGION
             )
-
-s3Client = boto3.client('s3')
-obj1_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back1.jpeg'}, ExpiresIn = 100)
-obj2_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back2.jpeg'}, ExpiresIn = 100)
-obj3_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back3.jpeg'}, ExpiresIn = 100)
-
+            
 #bucket = s3.Bucket(S3_BUCKET)
     
 # Create a connection to the MySQL database
@@ -51,7 +46,7 @@ db_conn = connections.Connection(
     host= DBHOST,
     port=DBPORT,
     user= DBUSER,
-    password= DBPWD,
+    password= DBPWD, 
     db= DATABASE
     
 )
@@ -60,9 +55,9 @@ table = 'employee';
 
 # Define the supported background
 background_url = {
-    "back1": str(obj1_purl),
-    "back2": str(obj2_purl),
-    "back3": str(obj3_purl)
+    "back1": "https://clo835-finals-group11.s3.amazonaws.com/back1.jpeg",
+    "back2": "https://clo835-finals-group11.s3.amazonaws.com/back2.jpeg",
+    "back3": "https://clo835-finals-group11.s3.amazonaws.com/back3.jpeg"
     }
 
 # Create a string of supported backgrounds
@@ -75,7 +70,7 @@ BACKGROUND = random.choice(["back1", "back2", "back3"])
 @app.route("/", methods=['GET', 'POST'])
 def home():
  
-    return render_template('addemp.html', GROUP_NAME=gname, background=background_url[BACKGROUND])
+    return render_template('addemp.html', GROUP_NAME=GName, background=background_url[BACKGROUND])
 
 @app.route("/about", methods=['GET','POST'])
 def about():
@@ -100,7 +95,7 @@ def about():
     #bucket=(S3_BUCKET), Key="back3.jpeg", Filename="back3_local.jpeg"
     #)
         
-    return render_template('about.html', GROUP_NAME=gname, background=background_url[BACKGROUND])
+    return render_template('about.html', GROUP_NAME=GName , background=background_url[BACKGROUND])
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -124,11 +119,11 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, GROUP_NAME=gname, background=background_url[BACKGROUND])
+    return render_template('addempoutput.html', name=emp_name, GROUP_NAME=GName, background=background_url[BACKGROUND])
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html", GROUP_NAME=gname, background=background_url[BACKGROUND])
+    return render_template("getemp.html", GROUP_NAME=GName, background=background_url[BACKGROUND])
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -157,7 +152,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], GROUP_NAME=gname background=background_url[BACKGROUND])
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], GROUP_NAME=GName, background=background_url[BACKGROUND])
 
 if __name__ == '__main__':
     
