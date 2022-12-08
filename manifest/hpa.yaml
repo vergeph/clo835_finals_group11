@@ -10,5 +10,5 @@ spec:
     kind: Deployment
     name: app-deployment
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 2
