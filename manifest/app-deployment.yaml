@@ -1,4 +1,3 @@
-#Deploy the app with default background
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +18,7 @@ spec:
         - name: app
           image: 466548522055.dkr.ecr.us-east-1.amazonaws.com/finals-app:v5.0
           ports:
-            - containerPort: 81
+            - containerPort: 80
           env:
             - name: DBPWD
               valueFrom:
