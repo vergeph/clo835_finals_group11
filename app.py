@@ -38,9 +38,9 @@ s3 = boto3.resource("s3",
             )
 
 s3Client = boto3.client('s3')
-obj1 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back1.jpeg'}, ExpiresIn = 100)
-obj2 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back2.jpeg'}, ExpiresIn = 100)
-obj3 = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'https://clo835-finals-group11.s3.amazonaws.com', 'Key': 'back3.jpeg'}, ExpiresIn = 100)
+obj1_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back1.jpeg'}, ExpiresIn = 100)
+obj2_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back2.jpeg'}, ExpiresIn = 100)
+obj3_purl = s3Client.generate_presigned_url('get_object', Params = {'Bucket': 'S3_BUCKET', 'Key': 'back3.jpeg'}, ExpiresIn = 100)
 
 #bucket = s3.Bucket(S3_BUCKET)
     
@@ -49,7 +49,7 @@ db_conn = connections.Connection(
     host= DBHOST,
     port=DBPORT,
     user= DBUSER,
-    password= DBPWD, 
+    password= DBPWD,
     db= DATABASE
     
 )
@@ -58,9 +58,9 @@ table = 'employee';
 
 # Define the supported background
 background_url = {
-    "back1": "https://clo835-finals-group11.s3.amazonaws.com/back1.jpeg",
-    "back2": "https://clo835-finals-group11.s3.amazonaws.com/back2.jpeg",
-    "back3": "https://clo835-finals-group11.s3.amazonaws.com/back3.jpeg"
+    "back1": str(obj1_purl),
+    "back2": str(obj2_purl),
+    "back3": str(obj3_purl)
     }
 
 # Create a string of supported backgrounds
