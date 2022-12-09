@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-deployment
+  namespace: final
   labels:
     app: employees
 spec:
-  replicas: 
+  replicas: 1 
   selector:
     matchLabels:
       app: employees
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: 466548522055.dkr.ecr.us-east-1.amazonaws.com/finals-app:v5.0
+          image: 645402193523.dkr.ecr.us-east-1.amazonaws.com/finals-app:v5.0
           ports:
             - containerPort: 81
           env:
